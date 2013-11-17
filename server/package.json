@@ -1,7 +1,7 @@
 {
   "name": "byu-wiki",
   "description": "byu wiki project for cs 360",
-  "version": "0.0.2",
+  "version": "0.0.8",
   "private": true,
   "dependencies": {
     "express": "3.x",
