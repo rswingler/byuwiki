@@ -1,3 +1,7 @@
+# General extensions #
+######################
+*.log
+
 # Node.js Modules #
 ###################
 server/node_modules/

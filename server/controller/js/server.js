@@ -25,7 +25,7 @@ var run = function(port) {
 
 		// Uncached version
 		app.use(express.static(__dirname + "/view"));
-	}
+	};
 
 	/**
 	 * Initializes the functions to handle certain specific requests. Used for serving up
@@ -33,11 +33,29 @@ var run = function(port) {
 	 */
 	var loadRoutes = function(app) {
 		app.get('/', homepage);
+
+		app.post('/github/pull', updateRepository);
 	};
 
+	/**
+	 * Dynamically populates the contents of the homepage. Used in place of an index.html
+	 * file.
+	 */
 	var homepage = function(req, res) {
 		res.send('BYU Class wiki, served from Node.js!');
 	};
+
+	/**
+	 * Runs a bash script that pulls from the github repository and reloads the server
+	 */
+	var updateRepository = function(req, res) {
+		var spawn = require('child_process').spawn;
+
+		console.log('Pulling the latest code from github');
+		res.send('');
+		spawn('./update.sh');
+	};
+
 
 	loadStaticServing(app);
 	loadRoutes(app);
