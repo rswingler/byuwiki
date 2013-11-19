@@ -21,10 +21,10 @@ var run = function(port) {
 		app.use(express.compress());
 
 		// Uncomment to use cached version (eventually)
-		// app.use(express.static(__dirname + "/view", {maxAge: oneDay}));
+		// app.use(express.static(process.cwd() + "/view", {maxAge: oneDay}));
 
 		// Uncached version
-		app.use(express.static(__dirname + "/view"));
+		app.use(express.static(process.cwd() + "/view"));
 	};
 
 	/**
