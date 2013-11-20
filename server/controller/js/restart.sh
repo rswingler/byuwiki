@@ -8,4 +8,4 @@ echo "restart.sh - Restarting the server (at $(date))" >> output.log
 #git stash pop >> output.log
 #sudo forever restart controller/js/wiki.js >> output.log
 #wait
-sudo forever restart wiki.js >> output.log
+#sudo forever restart wiki.js >> output.log
