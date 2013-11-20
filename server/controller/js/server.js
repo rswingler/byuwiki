@@ -42,7 +42,7 @@ var run = function(port) {
 	 * file.
 	 */
 	var homepage = function(req, res) {
-		res.send('BYU Class wiki, served direct to you from Node.js! Testing webHook and endpoint. test_five');
+		res.send('BYU Class wiki, served direct to you from Node.js! Testing webHook and endpoint. test_zero');
 	};
 
 	/**
@@ -56,7 +56,7 @@ var run = function(port) {
 		console.log('Pulling the latest code from github');
 		res.send('Please verify server has run update.sh');
 		spawnOne('./update.sh');
-		spawnOne('./restart.sh');
+		spawnOne('sudo ./restart.sh');
 
 
 	};
