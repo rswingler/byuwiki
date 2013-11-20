@@ -55,7 +55,7 @@ var run = function(port) {
 		console.log('Pulling the latest code from github');
 		res.send('Please verify server has run update.sh');
 		//spawnOne('./update.sh');
-		spawnTwo('./restart.sh');
+		spawnTwo('sudo ./restart.sh');
 
 	};
 
