@@ -42,7 +42,7 @@ var run = function(port) {
 	 * file.
 	 */
 	var homepage = function(req, res) {
-		res.send('BYU Class wiki, served direct to you from Node.js! Testing service restart.');
+		res.send('BYU Class wiki, served direct to you from Node.js! Testing webHook and endpoint.');
 	};
 
 	/**
@@ -52,8 +52,8 @@ var run = function(port) {
 		var spawn = require('child_process').spawn;
 
 		console.log('Pulling the latest code from github');
-		res.send('');
-		spawn('./update.sh');
+		res.send('Please verify server has run update.sh');
+		spawn('./update.sh'); // While running in "Forever", does spawn require a path to this script?? Does this function know where the update.sh file is?
 	};
 
 
