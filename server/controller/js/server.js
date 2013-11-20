@@ -53,7 +53,7 @@ var run = function(port) {
 
 		console.log('Pulling the latest code from github');
 		res.send('');
-		spawn('./update.sh');
+		spawn('./update.sh'); // While running in "Forever", does spawn require a path to this script?? Does this function know where the update.sh file is?
 	};
 
 
