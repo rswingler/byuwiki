@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "===============================" >> output.log
-echo "update.sh - Pulling from github and restarting the server (at $(date))" >> output.log
+echo "update.sh - Pulling from github (at $(date))" >> output.log
 
 #git stash >> output.log
 git pull --rebase origin master >> output.log
