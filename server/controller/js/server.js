@@ -61,15 +61,11 @@ var run = function(port) {
 	 * Runs a bash script that pulls from the github repository and reloads the server
 	 */
 	var updateRepository = function(req, res) {
-		var spawnOne = require('child_process').spawn;
-		var spawnTwo = require('child_process').spawn;
-
+		var spawn = require('child_process').spawn;
 
 		console.log('Pulling the latest code from github');
 		res.send('Please verify server has run update.sh');
-		spawnOne('./update.sh');
-		spawnTwo('sudo ./restart.sh');
-
+		spawn('./update.sh');
 
 	};
 
