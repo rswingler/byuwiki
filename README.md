@@ -12,7 +12,7 @@ Version 0.0.81 - Tues 19 Nov.
      * Make arbitrary modification to dummy HTML page
      * Commit/Push your changes
      * View the live dummy page: http://ec2-54-201-62-212.us-west-2.compute.amazonaws.com
-     * Arbitrary changes to dummy page should appear autmatically after commit/push
+     * Arbitrary changes to dummy page should appear automatically after commit/push
 
 Version 0.0.8 - Sat 16 Nov.
 * Auto-pull script is up and running
