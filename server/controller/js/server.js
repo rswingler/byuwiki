@@ -8,6 +8,8 @@ var run = function(port) {
 	 * Load all dependencies
 	 */
 	var express = require('express');
+	var path = require('path');
+
 	var app = express();
 
 	/**
@@ -24,7 +26,7 @@ var run = function(port) {
 		// app.use(express.static(process.cwd() + "/view", {maxAge: oneDay}));
 
 		// Uncached version
-		app.use(express.static(process.cwd() + "/view"));
+		app.use(express.static(process.cwd() + path.sep + "view"));
 	};
 
 	/**
