@@ -42,7 +42,7 @@ var run = function(port) {
 	 * file.
 	 */
 	var homepage = function(req, res) {
-		res.send('BYU Class wiki, served direct to you from Node.js! Testing webHook and endpoint. ### ');
+		res.send('BYU Class wiki, served direct to you from Node.js! Testing webHook and endpoint. $ ');
 	};
 
 	/**
