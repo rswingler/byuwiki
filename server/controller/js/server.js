@@ -45,7 +45,7 @@ var run = function(port) {
 	 * file.
 	 */
 	var homepage = function(req, res) {
-		res.send('BYU Class wiki, served direct to you from Node.js! Testing webHook and endpoint. test_ten');
+		res.send('Wiki dummy homepage. SUPERVISOR has successfully restarted wiki.js ten times in a row. Auto pull/restart appears to be stable.');
 	};
 
 	/**
