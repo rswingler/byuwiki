@@ -7,6 +7,11 @@ Version 0.1.0 - Wed 20 Nov.
 * The live server now pulls and restarts automatically!!
 * All changes pushed to GitHub are now immediately reflected on our live URL:
   * http://ec2-54-201-62-212.us-west-2.compute.amazonaws.com
+* Server Start Commands:
+  * SUPERVISOR: sudo forever start -c supervisor wiki.js
+  * NODEMON:    sudo forever start -c nodemon wiki.js
+* Server Stop Commands:
+  * Just change "start" to "stop" in the previous commands
 
 Version 0.0.81 - Tues 19 Nov.
 * update.sh modified; Forever service restart now works (absolute file path not necessary)
