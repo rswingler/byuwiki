@@ -1,0 +1,16 @@
+block content
+    h1.
+        Dummy Page One
+    ul
+        each wiki, i in template_pageOne
+            li
+                a(href="localhost")= wiki.wikiName
+            li
+                a(href="localhost")= wiki.categoryName
+
+            div(style='width:50%;')
+                 != wiki.html
+
+
+            
+
