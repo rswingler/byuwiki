@@ -10,7 +10,18 @@ var run = function(port) {
 	var express = require('express');
 	var path = require('path');
 
+	//MONGO DB DEPENDENCIES
+	var mongo = require('mongodb');
+	var monk = require('monk');
+	var db = monk('localhost:27017/wikidb');
+
+	//JADE HANDLER
+	var jadeHandler = require('../../view/jade/jadeHandler.js');
+
 	var app = express();
+	//CONFIGURE EXPRESS FOR JADE
+	app.set('views', '../../view/jade/templates');
+	app.set('view engine', 'jade');
 
 	/**
 	 * Enables static serving of .css and .js files from the server/view folder. Static
@@ -38,6 +49,10 @@ var run = function(port) {
 		app.get('/wiki/:page', viewWikiPage);
 
 		app.post('/github/pull', updateRepository);
+
+		//MONGO DYNAMICALLY LOADED PAGES (DUMMY PAGES)
+		app.get('/one', jadeHandler.pageOne(db));
+		app.get('/two', jadeHandler.pageTwo(db));
 	};
 
 	/**
@@ -45,7 +60,7 @@ var run = function(port) {
 	 * file.
 	 */
 	var homepage = function(req, res) {
-		res.send('Wiki dummy homepage. SUPERVISOR has successfully restarted wiki.js ten times in a row. Auto pull/restart appears to be stable.');
+		res.send('Wiki Dummy Homepage');
 	};
 
 	/**
