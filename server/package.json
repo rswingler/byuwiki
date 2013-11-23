@@ -7,6 +7,9 @@
     "express": "3.x",
     "jade": "0.x",
     "path": "0.x",
-    "swig": "1.x"
+    "swig": "1.x",
+    "mongodb": "*",
+    "monk": "*",
+    "markdown-js": "*"
   }
 }
