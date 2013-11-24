@@ -3,6 +3,20 @@ byuwiki
 
 BYU Class Wiki
 
+Version 0.1.1 - Sat 23 Nov.
+
+* MongoDB read/write integration has been completed (basic read/write examples are operational)
+* MongoDB read/write example: http://ec2-54-201-62-212.us-west-2.compute.amazonaws.com/two
+* For testing on your own system, you must install and run mongoDB server in the "model/mongo_database" folder
+  * Our database name: "wikidb"
+  * Our current, and only collection: "content_html"
+  * Use the mongo shell "$ mongo" to perform manual adjustments to the database
+* MongoDB Server runs as its own service (default port: 27017)
+* To start MongoDB server as a daemon:
+  * navigate to the "model" folder, then execute this command:
+  * sudo mongod --fork --logpath db.log --dbpath mongo_database
+* NPM dependencies have been added to the config JSON (run "sudo npm install" to update dependencies)
+
 Version 0.1.0 - Wed 20 Nov.
 * The live server now pulls and restarts automatically!!
 * All changes pushed to GitHub are now immediately reflected on our live URL:
