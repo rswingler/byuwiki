@@ -1,6 +1,15 @@
 block content
     h1.
         Dummy Page Two
+
+    form(name="testWrite",method="post", action="/writeEndpoint")
+        input(type="hidden", name="dateCreated", value="today")
+        input(type="hidden", name="catID", value="1")
+        input(type="hidden", name="catName", value="Computer Science")
+        input(type="text", placeholder="Article Name", name="articleName")
+        input(type="text", placeholder="HTML Input", name="myHtml")
+        button(type="submit") submit
+
     ul
         each wiki, i in template_pageTwo
             li
@@ -10,4 +19,6 @@ block content
 
             div(style='width:100%;')
                  != wiki.html
+
+
 

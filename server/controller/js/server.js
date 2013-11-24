@@ -22,6 +22,7 @@ var run = function(port) {
 	//CONFIGURE EXPRESS FOR JADE
 	app.set('views', '../../view/jade/templates');
 	app.set('view engine', 'jade');
+	app.use(express.urlencoded());
 
 	/**
 	 * Enables static serving of .css and .js files from the server/view folder. Static
@@ -53,6 +54,9 @@ var run = function(port) {
 		//MONGO DYNAMICALLY LOADED PAGES (DUMMY PAGES)
 		app.get('/one', jadeHandler.pageOne(db));
 		app.get('/two', jadeHandler.pageTwo(db));
+
+		//WRITE TO DATABASE - ENDPOINTS
+		app.post('/writeEndpoint', jadeHandler.write(db));
 	};
 
 	/**
