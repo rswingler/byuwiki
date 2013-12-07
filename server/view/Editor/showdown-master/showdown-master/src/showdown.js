@@ -394,7 +394,7 @@ var _HashHTMLBlocks = function(text) {
 		)
 		/g,hashElement);
 	*/
-	text = text.replace(/(\n[ ]{0,3}(<(hr)\b([^<>])*?\/?>)[ \t]*(?=\n{2,}))/g,hashElement);
+	text = text.replace(/(\n[ ]{0,3}(<(hr)\u([^<>])*?\/?>)[ \t]*(?=\n{2,}))/g,hashElement);
 
 	// Special case for standalone HTML comments:
 
@@ -1129,12 +1129,16 @@ var _EncodeCode = function(text) {
 
 var _DoItalicsAndBold = function(text) {
 
+	text = text.replace(/(_)(?=\S)([^\r]_?\S[_]*)\1/g,
+		"<u>$2</u>");
 	// <strong> must go first:
-	text = text.replace(/(\*\*|__)(?=\S)([^\r]*?\S[*_]*)\1/g,
+	text = text.replace(/(\*\*)(?=\S)([^\r]*?\S[*]*)\1/g,
 		"<strong>$2</strong>");
 
-	text = text.replace(/(\*|_)(?=\S)([^\r]*?\S)\1/g,
+	text = text.replace(/(\*)(?=\S)([^\r]*?\S)\1/g,
 		"<em>$2</em>");
+	
+	
 
 	return text;
 }
