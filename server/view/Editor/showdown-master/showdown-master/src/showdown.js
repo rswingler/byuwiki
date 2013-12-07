@@ -504,6 +504,7 @@ var _RunSpanGamut = function(text) {
 	text = _DoAutoLinks(text);
 	text = _EncodeAmpsAndAngles(text);
 	text = _DoItalicsAndBold(text);
+	text = _DoUnderline(text);
 
 	// Do hard breaks:
 	text = text.replace(/  +\n/g," <br />\n");
@@ -1128,9 +1129,6 @@ var _EncodeCode = function(text) {
 
 
 var _DoItalicsAndBold = function(text) {
-
-	text = text.replace(/(_)(?=\S)([^\r]_?\S[_]*)\1/g,
-		"<u>$2</u>");
 	// <strong> must go first:
 	text = text.replace(/(\*\*)(?=\S)([^\r]*?\S[*]*)\1/g,
 		"<strong>$2</strong>");
@@ -1139,6 +1137,14 @@ var _DoItalicsAndBold = function(text) {
 		"<em>$2</em>");
 	
 	
+
+	return text;
+}
+
+var _DoUnderline = function(text) {
+
+	text = text.replace(/(_)(?=\S)([^\r]*?\S)\1/g,
+		"<u>$2</u>");
 
 	return text;
 }
