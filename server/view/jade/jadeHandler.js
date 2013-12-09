@@ -56,11 +56,10 @@ exports.init = function(db) {
             safeFind(collection, {name: pagename}, function(results) {
                 var data = results[0] || null;
                 if (data) {
-                    console.log(data);
                     res.send('Found ' + pagename);
                 }
                 else {
-                    res.send('404: ' + pagename);
+                    res.status(404).send('<h1>404 Not Found</h1><p>Unable to find wiki page <b>' + pagename + '</b>.</p>');
                 }
             });
         }
