@@ -81,15 +81,6 @@ var run = function(port) {
 	};
 
 	/**
-	 * Attempts to retrieve the wiki data for the requested page
-	 */
-	var viewWikiPage = function(req, res) {
-		var pagename = req.params.page;
-
-		res.send('Displaying page ' + pagename);
-	}
-
-	/**
 	 * Runs a bash script that pulls from the github repository and reloads the server
 	 */
 	var updateRepository = function(req, res) {

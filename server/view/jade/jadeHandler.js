@@ -2,18 +2,14 @@ exports.init = function(db) {
     return {
         pageOne: function(req, res) {
             var collection = db.get('content_html');
-            collection.find({},{},function(e,docs) {
-                res.render('template_pageOne', {
-                    "template_pageOne" : docs
-                });
-            })
+            safeFind(collection, {},function(docs) {
+                render(res, 'template_pageOne', {'template_pageOne': docs});
+            });
         },
         pageTwo: function(req, res) {
             var collection = db.get('content_html');
-            collection.find({},{},function(e,docs) {
-                res.render('template_pageTwo', {
-                "template_pageTwo" : docs
-                });
+            safeFind(collection, {},function(docs) {
+                render(res, 'template_pageTwo', {'template_pageTwo': docs});
             });
         },
         write: function(req, res) {
@@ -48,8 +44,38 @@ exports.init = function(db) {
                 }
             );
         },
-        showWikiPage: function(req, res) {
 
+        /**
+         * Attempts to retrieve the wiki data for the requested page
+         */
+        showWikiPage: function(req, res) {
+            var pagename = req.params.page || '';
+
+            var collection = db.get('content_html');
+
+            safeFind(collection, {name: pagename}, function(results) {
+                var data = results[0] || null;
+                if (data) {
+                    console.log(data);
+                    res.send('Found ' + pagename);
+                }
+                else {
+                    res.send('404: ' + pagename);
+                }
+            });
         }
     };
+};
+
+var safeFind = function(collection, criteria, callback) {
+    collection.find(criteria, function(e, docs) {
+        if (e) throw e;
+        callback(docs);
+    });
+};
+
+var render = function(res, title, variables) {
+    variables = variables || {};
+
+    res.render(title, variables);
 };
