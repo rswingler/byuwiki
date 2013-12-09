@@ -29,7 +29,7 @@ var run = function(port) {
 	};
 
 	//JADE HANDLER
-	var jadeHandler = require(getPath(['view', 'jade', 'jadeHandler.js']));
+	var jadeHandler = require(getPath(['view', 'jade', 'jadeHandler.js'])).init(db);
 
 	var app = express();
 	//CONFIGURE EXPRESS FOR JADE
@@ -60,16 +60,16 @@ var run = function(port) {
 	 */
 	var loadRoutes = function(app) {
 		app.get('/', homepage);
-		app.get('/wiki/:page', viewWikiPage);
+		app.get('/wiki/:page', jadeHandler.showWikiPage);
 
 		app.post('/github/pull', updateRepository);
 
 		//MONGO DYNAMICALLY LOADED PAGES (DUMMY PAGES)
-		app.get('/one', jadeHandler.pageOne(db));
-		app.get('/two', jadeHandler.pageTwo(db));
+		app.get('/one', jadeHandler.pageOne);
+		app.get('/two', jadeHandler.pageTwo);
 
 		//WRITE TO DATABASE - ENDPOINTS
-		app.post('/writeEndpoint', jadeHandler.write(db));
+		app.post('/writeEndpoint', jadeHandler.write);
 	};
 
 	/**
