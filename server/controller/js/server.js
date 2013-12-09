@@ -15,12 +15,25 @@ var run = function(port) {
 	var monk = require('monk');
 	var db = monk('localhost:27017/wikidb');
 
+	/**
+	 * Given an array of path elements, returns the absolute path to the requested resource.
+	 */
+	var getPath = function(paths) {
+		var result = process.cwd();
+
+		paths.forEach(function(pathElement) {
+			result = result + path.sep + pathElement;
+		});
+
+		return result;
+	};
+
 	//JADE HANDLER
-	var jadeHandler = require('../../view/jade/jadeHandler.js');
+	var jadeHandler = require(getPath(['view', 'jade', 'jadeHandler.js']));
 
 	var app = express();
 	//CONFIGURE EXPRESS FOR JADE
-	app.set('views', '../../view/jade/templates');
+	app.set('views', getPath(['view', 'jade', 'templates']));
 	app.set('view engine', 'jade');
 	app.use(express.urlencoded());
 
