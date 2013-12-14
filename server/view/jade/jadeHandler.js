@@ -1,13 +1,13 @@
 exports.init = function(db) {
     return {
         pageOne: function(req, res) {
-            var collection = db.get('content_html');
+            var collection = db.get('articles');
             safeFind(collection, {},function(docs) {
                 render(res, 'template_pageOne', {'template_pageOne': docs});
             });
         },
         pageTwo: function(req, res) {
-            var collection = db.get('content_html');
+            var collection = db.get('articles');
             safeFind(collection, {},function(docs) {
                 render(res, 'template_pageTwo', {'template_pageTwo': docs});
             });
@@ -21,7 +21,7 @@ exports.init = function(db) {
             var html = req.body.myHtml;
 
             // Set our collection
-            var collection = db.get('content_html');
+            var collection = db.get('articles');
 
             // Submit to the DB
             collection.insert({
@@ -50,14 +50,14 @@ exports.init = function(db) {
          */
         showWikiPage: function(req, res) {
             var pagename = req.params.page || '';
+            pagename = pagename.replace("_", " ")
 
-            var collection = db.get('content_html');
+            var collection = db.get('articles');
 
-            safeFind(collection, {name: pagename}, function(results) {
+            safeFind(collection, {wikiTitle: pagename}, function(results) {
                 var data = results[0] || null;
                 if (data) {
-                    // res.send('Found ' + pagename);
-                    render(res, 'wikiPage', {'data': data});
+                    render(res, 'contentPage', {'title': pagename, 'content': data.html, 'isArticle': true});
                 }
                 else {
                     res.status(404).send('<h1>404 Not Found</h1><p>Unable to find wiki page <b>' + pagename + '</b>.</p>');
