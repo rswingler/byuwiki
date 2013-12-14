@@ -1,8 +1,8 @@
 //- Expected input data:
 //-   urlTitle(String): the url for this wiki page
 //-   title (String): the title of this wiki page
-//-   content (String): the html content to populate the wiki page
-//-   isArticle (Boolean): Whether or not this page is an article (as opposed to a discussion page)
+//-   isArticle(Boolean): whether or not this page is an article (as opposed to a discussion page)
+//-   categories(Array(String)): an array of categories this page currently belongs to
 !!! 5
 html
   head
@@ -29,17 +29,25 @@ html
             a(href='#') Discussion
       #headerright
         ul
+          li#read
+            a(href='/wiki/#{urlTitle}') Read
           li#selected2
-            a(href='#') Read
-          li#edit
-            a(href='/edit/#{urlTitle}') Edit
+            a(href='#') Edit
       #search
         form#cse-search-box(action='http/google.com/cse')
           input(type='hidden', name='cx', value='YOUR SEARCH ENGINE ID goes here')
           input(type='hidden', name='ie', value='UTF-8')
           input(type='text', name='q', size='25')
           input(type='submit', name='sa', value='Search')
-    #articleContent
-      h1 #{title}
+    #editContent
+      h1
+        | Edit: #{title}
       hr
-      !{content}
+      #placeHolder Text Editor Goes Here
+      form#dropdown(action='')
+        select(name='cars')
+          option(value='Select Category') Select Category
+          option(value='saab') Physical & Mathematical Sciences
+          option(value='fiat') Marriot School of Business
+          option(value='audi') Theater & Media Arts
+      p#addCategory + Add New Category

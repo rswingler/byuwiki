@@ -61,6 +61,7 @@ var run = function(port) {
 	var loadRoutes = function(app) {
 		app.get('/', homepage);
 		app.get('/wiki/:page', jadeHandler.showWikiPage);
+		app.get('/edit/:page', jadeHandler.editWikiPage);
 
 		app.post('/github/pull', updateRepository);
 

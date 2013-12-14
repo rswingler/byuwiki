@@ -50,14 +50,34 @@ exports.init = function(db) {
          */
         showWikiPage: function(req, res) {
             var pagename = req.params.page || '';
-            pagename = pagename.replace("_", " ")
+            var title = pagename.replace("_", " ")
 
             var collection = db.get('articles');
 
-            safeFind(collection, {wikiTitle: pagename}, function(results) {
+            safeFind(collection, {wikiTitle: title}, function(results) {
                 var data = results[0] || null;
                 if (data) {
-                    render(res, 'contentPage', {'title': pagename, 'content': data.html, 'isArticle': true});
+                    render(res, 'contentPage', {'urlTitle': pagename, 'title': title, 'content': data.html, 'isArticle': true});
+                }
+                else {
+                    res.status(404).send('<h1>404 Not Found</h1><p>Unable to find wiki page <b>' + pagename + '</b>.</p>');
+                }
+            });
+        },
+
+        /**
+         * Attempts to retrieve the wiki data for the requested page for editing
+         */
+        editWikiPage: function(req, res) {
+            var pagename = req.params.page || '';
+            var title = pagename.replace("_", " ")
+
+            var collection = db.get('articles');
+
+            safeFind(collection, {wikiTitle: title}, function(results) {
+                var data = results[0] || null;
+                if (data) {
+                    render(res, 'editPage', {'urlTitle': pagename, 'title': title, 'isArticle': true, 'categories': data.catagoryNames || []});
                 }
                 else {
                     res.status(404).send('<h1>404 Not Found</h1><p>Unable to find wiki page <b>' + pagename + '</b>.</p>');
