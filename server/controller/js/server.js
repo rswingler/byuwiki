@@ -28,6 +28,9 @@ var run = function(port) {
 		return result;
 	};
 
+	// MODEL
+	var model = require(getPath(['model', 'js', 'modelapi.js'])).init(db);
+
 	//JADE HANDLER
 	var jadeHandler = require(getPath(['view', 'jade', 'jadeHandler.js'])).init(db);
 
@@ -62,6 +65,7 @@ var run = function(port) {
 		app.get('/', homepage);
 		app.get('/wiki/:page', jadeHandler.showWikiPage);
 		app.get('/edit/:page', jadeHandler.editWikiPage);
+		app.get('/createNew/:page', createPage);
 
 		app.post('/github/pull', updateRepository);
 
@@ -90,9 +94,15 @@ var run = function(port) {
 		console.log('Pulling the latest code from github');
 		res.send('Please verify server has run update.sh');
 		spawn('./update.sh');
-
 	};
 
+	var createPage = function(req, res) {
+        var pagename = req.params.page || '';
+        var title = pagename.replace("_", " ");
+
+        model.createPage(title);
+        res.redirect('../../edit/' + pagename)
+	}
 
 	loadStaticServing(app);
 	loadRoutes(app);

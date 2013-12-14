@@ -50,7 +50,7 @@ exports.init = function(db) {
          */
         showWikiPage: function(req, res) {
             var pagename = req.params.page || '';
-            var title = pagename.replace("_", " ")
+            var title = pagename.replace("_", " ");
 
             var collection = db.get('articles');
 
@@ -70,7 +70,7 @@ exports.init = function(db) {
          */
         editWikiPage: function(req, res) {
             var pagename = req.params.page || '';
-            var title = pagename.replace("_", " ")
+            var title = pagename.replace("_", " ");
 
             var collection = db.get('articles');
 
