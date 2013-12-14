@@ -35,7 +35,7 @@ function h2Text()
 }
 function getInputTextArea()
 {
-	return document.getElementById('inputArea');
+	return document.getElementById('inputPane');
 }
 
 //INPUT IMAGE
