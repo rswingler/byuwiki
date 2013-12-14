@@ -35,7 +35,7 @@ function h2Text()
 }
 function getInputTextArea()
 {
-	return document.getElementById('inputArea');
+	return document.getElementById('inputPane');
 }
 
 //INPUT IMAGE
@@ -72,6 +72,8 @@ function addMarkup(el,markup)
     	var newTextAreaValue = prefix + selected + suffix;
     	
     	el.value = newTextAreaValue;
+
+	renderHTML();
     	
        // return newTextAreaValue;
     }
@@ -84,6 +86,19 @@ function addMarkup(el,markup)
         }
     }
     //return "";
+}
+
+function renderHTML()
+{
+   	var inputPane = document.getElementById('inputPane');
+	var previewPane = document.getElementById('previewPane');
+
+	//alert(iPane.value);
+	var converter = new Showdown.converter();
+	var html = converter.makeHtml(inputPane.value);
+
+	//alert(html);
+	previewPane.innerHTML = html;
 }
 
 // function getSelectedText(el) {

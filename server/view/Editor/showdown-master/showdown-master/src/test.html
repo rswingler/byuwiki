@@ -1,19 +1,25 @@
 <html>
 <head>
 	<script type="text/javascript" src="wikiEditorToolbar.js"></script>
+	<script type="text/javascript" src="showdown.js"></script>
 </head>
-</body>
-<menu type="toolbar" style="float:left; padding:0px;">
+<body onload="renderHTML()">
+<div style="float:left; width:100%;">
+<menu type="toolbar" style="float:left; padding:5px 5px;background-color:#F0F0F0;">
 	<button type="button" onclick="boldText()" value="bold"><img src="images/bold.png"></button>
 	<button type="button" onclick="italicText()" value="italics"><img src="images/italic.png"></button>
 	<button type="button" onclick="underlineText()" value="underline"><img src="images/underline.png"></button>
 	<button type="button" onclick="h1Text()" value="header 1"><img src="images/h1.png"></button>
 	<button type="button" onclick="h2Text()" value="header 2"><img src="images/h2.png"></button>
 </menu>
-<div style="width:50%">
-<textarea id="inputArea" style="width:100%; height:50%">
+</div>
+<div style="float:left; width:50%;">
+<textarea id="inputPane" style="width:95%; height:90% " onkeydown="renderHTML()" onkeyup="renderHTML()" onkeypress="renderHTML()">
 myText this is a test
 </textarea>
+</div>
+
+<div id="previewPane" style="display: block; float:left; width:49%; height:90%; overflow:scroll;">
 </div>
 
 </body>
