@@ -32,7 +32,7 @@ var run = function(port) {
 	var model = require(getPath(['model', 'js', 'modelapi.js'])).init(db);
 
 	//JADE HANDLER
-	var jadeHandler = require(getPath(['view', 'jade', 'jadeHandler.js'])).init(db);
+	var jadeHandler = require(getPath(['view', 'jade', 'jadeHandler.js'])).init(model);
 
 	var app = express();
 	//CONFIGURE EXPRESS FOR JADE
@@ -70,11 +70,11 @@ var run = function(port) {
 		app.post('/github/pull', updateRepository);
 
 		//MONGO DYNAMICALLY LOADED PAGES (DUMMY PAGES)
-		app.get('/one', jadeHandler.pageOne);
-		app.get('/two', jadeHandler.pageTwo);
+		// app.get('/one', jadeHandler.pageOne);
+		// app.get('/two', jadeHandler.pageTwo);
 
 		//WRITE TO DATABASE - ENDPOINTS
-		app.post('/writeEndpoint', jadeHandler.write);
+		// app.post('/writeEndpoint', jadeHandler.write);
 	};
 
 	/**
