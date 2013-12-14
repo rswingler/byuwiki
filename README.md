@@ -22,8 +22,8 @@ Version 0.1.0 - Wed 20 Nov.
 * All changes pushed to GitHub are now immediately reflected on our live URL:
   * http://ec2-54-201-62-212.us-west-2.compute.amazonaws.com
 * Server Start Commands:
+  * Navigate to the "Server" folder and then run the following command:
   * SUPERVISOR: sudo forever start -c supervisor wiki.js
-  * NODEMON:    sudo forever start -c nodemon wiki.js
 * Server Stop Commands:
   * Just change "start" to "stop" in the previous commands
 
