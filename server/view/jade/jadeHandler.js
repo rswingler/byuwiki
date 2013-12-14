@@ -56,7 +56,8 @@ exports.init = function(db) {
             safeFind(collection, {name: pagename}, function(results) {
                 var data = results[0] || null;
                 if (data) {
-                    res.send('Found ' + pagename);
+                    // res.send('Found ' + pagename);
+                    render(res, 'wikiPage', {'data': data});
                 }
                 else {
                     res.status(404).send('<h1>404 Not Found</h1><p>Unable to find wiki page <b>' + pagename + '</b>.</p>');
