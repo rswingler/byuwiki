@@ -1143,7 +1143,7 @@ var _DoItalicsAndBold = function(text) {
 
 var _DoUnderline = function(text) {
 
-	text = text.replace(/(_)(?=\S)([^\r]*?\S)\1/g,
+	text = text.replace(/(__)(?=\S)([^\r]*?\S)\1/g,
 		"<u>$2</u>");
 
 	return text;
