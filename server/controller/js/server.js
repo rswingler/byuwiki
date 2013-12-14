@@ -39,6 +39,7 @@ var run = function(port) {
 	app.set('views', getPath(['view', 'jade', 'templates']));
 	app.set('view engine', 'jade');
 	app.use(express.urlencoded());
+	app.use(express.json());
 
 	/**
 	 * Enables static serving of .css and .js files from the server/view folder. Static
@@ -62,11 +63,14 @@ var run = function(port) {
 	 * dynamic content.
 	 */
 	var loadRoutes = function(app) {
+
 		app.get('/', homepage);
 		app.get('/wiki/:page', jadeHandler.showWikiPage);
 		app.get('/edit/:page', jadeHandler.editWikiPage);
-		app.get('/createNew/:page', createPage);
 
+		app.get('/createNew/:page', createPage);
+		
+		app.post('/update/:page', updatePage);
 		app.post('/github/pull', updateRepository);
 
 		//MONGO DYNAMICALLY LOADED PAGES (DUMMY PAGES)
@@ -101,7 +105,18 @@ var run = function(port) {
         var title = pagename.replace("_", " ");
 
         model.createPage(title);
-        res.redirect('../../edit/' + pagename)
+        res.redirect('../../edit/' + pagename);
+	}
+
+	var updatePage = function(req, res) {
+        var pagename = req.params.page || '';
+        var title = pagename.replace("_", " ");
+
+        var html = req.body['html'];
+        var markup = req.body['markup'];
+
+        model.setPageContent(title, html, markup);
+        res.send('{"status": "success"}');
 	}
 
 	loadStaticServing(app);

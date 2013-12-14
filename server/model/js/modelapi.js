@@ -33,6 +33,23 @@ exports.init = function(db) {
 			safeFind(collection, {'wikiTitle': pageName}, function(results) {
 				callback(results[0] || null)
 			});
+		},
+
+		setPageContent: function(pageName, html, markup) {
+			var collection = db.get('articles');
+
+			safeFind(collection, {'wikiTitle': pageName}, function(results) {
+				var page = results[0] || null;
+				if (page) {
+					page.html = html || page.html;
+					page.markup = markup || page.markup;
+
+					collection.update(page._id, page);
+				}
+				else {
+					throw "Could not find document " + pageName + "in articles."
+				}
+			});
 		}
 	}
 }
