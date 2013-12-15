@@ -15,12 +15,28 @@ var run = function(port) {
 	var monk = require('monk');
 	var db = monk('localhost:27017/wikidb');
 
+	/**
+	 * Given an array of path elements, returns the absolute path to the requested resource.
+	 */
+	var getPath = function(paths) {
+		var result = process.cwd();
+
+		paths.forEach(function(pathElement) {
+			result = result + path.sep + pathElement;
+		});
+
+		return result;
+	};
+
+	// MODEL
+	var model = require(getPath(['model', 'js', 'modelapi.js'])).init(db);
+
 	//JADE HANDLER
-	var jadeHandler = require('../../view/jade/jadeHandler.js');
+	var jadeHandler = require(getPath(['view', 'jade', 'jadeHandler.js'])).init(model);
 
 	var app = express();
 	//CONFIGURE EXPRESS FOR JADE
-	app.set('views', '../../view/jade/templates');
+	app.set('views', getPath(['view', 'jade', 'templates']));
 	app.set('view engine', 'jade');
 	app.use(express.urlencoded());
 
@@ -47,16 +63,18 @@ var run = function(port) {
 	 */
 	var loadRoutes = function(app) {
 		app.get('/', homepage);
-		app.get('/wiki/:page', viewWikiPage);
+		app.get('/wiki/:page', jadeHandler.showWikiPage);
+		app.get('/edit/:page', jadeHandler.editWikiPage);
+		app.get('/createNew/:page', createPage);
 
 		app.post('/github/pull', updateRepository);
 
 		//MONGO DYNAMICALLY LOADED PAGES (DUMMY PAGES)
-		app.get('/one', jadeHandler.pageOne(db));
-		app.get('/two', jadeHandler.pageTwo(db));
+		// app.get('/one', jadeHandler.pageOne);
+		// app.get('/two', jadeHandler.pageTwo);
 
 		//WRITE TO DATABASE - ENDPOINTS
-		app.post('/writeEndpoint', jadeHandler.write(db));
+		// app.post('/writeEndpoint', jadeHandler.write);
 	};
 
 	/**
@@ -68,15 +86,6 @@ var run = function(port) {
 	};
 
 	/**
-	 * Attempts to retrieve the wiki data for the requested page
-	 */
-	var viewWikiPage = function(req, res) {
-		var pagename = req.params.page;
-
-		res.send('Displaying page ' + pagename);
-	}
-
-	/**
 	 * Runs a bash script that pulls from the github repository and reloads the server
 	 */
 	var updateRepository = function(req, res) {
@@ -85,9 +94,15 @@ var run = function(port) {
 		console.log('Pulling the latest code from github');
 		res.send('Please verify server has run update.sh');
 		spawn('./update.sh');
-
 	};
 
+	var createPage = function(req, res) {
+        var pagename = req.params.page || '';
+        var title = pagename.replace("_", " ");
+
+        model.createPage(title);
+        res.redirect('../../edit/' + pagename)
+	}
 
 	loadStaticServing(app);
 	loadRoutes(app);

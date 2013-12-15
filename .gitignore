@@ -5,3 +5,7 @@
 # Node.js Modules #
 ###################
 server/node_modules/
+
+# Mongo DB Files #
+##################
+server/model/mongo_database/

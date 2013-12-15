@@ -1,0 +1,71 @@
+//- Expected input data:
+//-   urlTitle(String): the url for this wiki page
+//-   title (String): the title of this wiki page
+//-   isArticle(Boolean): whether or not this page is an article (as opposed to a discussion page)
+//-   categories(Array(String)): an array of categories this page currently belongs to
+!!! 5
+html
+  head
+    link(rel='stylesheet', type='text/css', href='/css/contentPage.css')
+    script(type='text/javascript', src='../../js/wikiEditorToolbar.js')
+    script(type='text/javascript', src='../../js/showdown.js')
+  body(onload='renderHTML()')
+    #menu
+      img(border='0', src='../../img/byu_logo.png', alt='BYU logo', width='100%', height='30%')
+      br
+      a(href='')
+        | Main Page
+        a
+          br
+          a(href='')
+            | Browse Majors
+            a
+    #topheader
+      a.login(href='#') Login
+      a.createaccount(href='#') Create Account
+      #header
+        ul
+          li#selected
+            a(href='#') Article
+          li
+            a(href='#') Discussion
+      #headerright
+        ul
+          li#read
+            a(href='/wiki/#{urlTitle}') Read
+          li#selected2
+            a(href='#') Edit
+      #search
+        form#cse-search-box(action='http/google.com/cse')
+          input(type='hidden', name='cx', value='YOUR SEARCH ENGINE ID goes here')
+          input(type='hidden', name='ie', value='UTF-8')
+          input(type='text', name='q', size='25')
+          input(type='submit', name='sa', value='Search')
+    #editContent
+      h1
+        | Edit: #{title}
+      hr
+      //-#editorPanes
+      menu#toolbar(type='toolbar')
+           button(type='button', onclick='boldText()', value='bold')
+            img(src='../../img/bold.png')
+           button(type='button', onclick='italicText()', value='italics')
+            img(src='../../img/italic.png')
+           button(type='button', onclick='underlineText()', value='underline')
+            img(src='../../img/underline.png')
+           button(type='button', onclick='h1Text()', value='header 1')
+            img(src='../../img/h1.png')
+           button(type='button', onclick='h2Text()', value='header 2')
+            img(src='../../img/h2.png')
+      textarea#inputPane(onkeydown='renderHTML()', onkeyup='renderHTML()', onkeypress='renderHTML()')
+      #previewPane
+
+      #saveBar
+          form#dropdown(action='')
+           select(name='cars')
+            option(value='Select Category') Select Category
+            option(value='saab') Physical & Mathematical Sciences
+            option(value='fiat') Marriot School of Business
+            option(value='audi') Theater & Media Arts
+          p#addCategory + Add New Category
+
