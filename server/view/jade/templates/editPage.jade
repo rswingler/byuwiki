@@ -63,6 +63,7 @@ html
             img(src='../../img/list-numeric.png')
            button(type='button', onclick='addImage()', value='image')
             img(src='../../img/image.png')
+
       textarea#inputPane(onkeydown='renderHTML()', onkeyup='renderHTML()', onkeypress='renderHTML()')
       #previewPane
 
@@ -76,7 +77,7 @@ html
           p#addCategory + Add New Category
 
       #buttons
-          a.save(href='#') Save Changes
+          a.save(onclick='saveAndPost()') Save Changes
             a.cancel(href='#') Cancel
 
 
