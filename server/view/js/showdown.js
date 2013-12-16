@@ -440,7 +440,7 @@ var _HashHTMLBlocks = function(text) {
 }
 
 var hashElement = function(wholeMatch,m1) {
-	var blockText = m1;
+	var block Text = m1;
 
 	// Undo double lines
 	blockText = blockText.replace(/\n\n/g,"\n");
@@ -505,6 +505,7 @@ var _RunSpanGamut = function(text) {
 	text = _EncodeAmpsAndAngles(text);
 	text = _DoItalicsAndBold(text);
 	text = _DoUnderline(text);
+	text = _takeOutHtml(text);
 
 	// Do hard breaks:
 	text = text.replace(/  +\n/g," <br />\n");
@@ -1139,6 +1140,12 @@ var _DoItalicsAndBold = function(text) {
 	
 
 	return text;
+}
+
+var _takeOutHtml = function(text) {
+
+	text = text.replace(/(<)(?=\S)([^\r]*?\S)/g,
+		"&lt");
 }
 
 var _DoUnderline = function(text) {
