@@ -989,6 +989,7 @@ var _DoCodeBlocks = function(text) {
 			var nextChar = m2;
 
 			codeblock = _EncodeCode( _Outdent(codeblock));
+
 			codeblock = _Detab(codeblock);
 			codeblock = codeblock.replace(/^\n+/g,""); // trim leading newlines
 			codeblock = codeblock.replace(/\n+$/g,""); // trim trailing whitespace
@@ -1001,7 +1002,6 @@ var _DoCodeBlocks = function(text) {
 
 	// attacklab: strip sentinel
 	text = text.replace(/~0/,"");
-
 	return text;
 };
 
@@ -1145,7 +1145,7 @@ var _DoItalicsAndBold = function(text) {
 var _takeOutHtml = function(text) {
 
 	text = text.replace(/(<)/g,
-		"&lt");
+		"");
 
 	return text;
 }
@@ -1216,6 +1216,7 @@ var _FormParagraphs = function(text) {
 	// Strip leading and trailing lines:
 	text = text.replace(/^\n+/g,"");
 	text = text.replace(/\n+$/g,"");
+
 
 	var grafs = text.split(/\n{2,}/g);
 	var grafsOut = [];
