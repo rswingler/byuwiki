@@ -25,13 +25,21 @@ function underlineText()
 {
   	addMarkup(getInputTextArea(), "underline");
 }
-function h1Text()
-{
-  	addMarkup(getInputTextArea(), "h1");
-}
 function h2Text()
 {
   	addMarkup(getInputTextArea(), "h2");
+}
+function h3Text()
+{
+  	addMarkup(getInputTextArea(), "h3");
+}
+function bulletList()
+{
+  	addMarkup(getInputTextArea(), "bullet");
+}
+function numericList()
+{
+  	addMarkup(getInputTextArea(), "numeric");
 }
 function getInputTextArea()
 {
@@ -41,7 +49,19 @@ function getInputTextArea()
 //INPUT IMAGE
 function addImage()
 {
+    var imageURL = prompt("Please enter the URL of your image:","http://yourPictureURL");
+    var el = getInputTextArea();
+    var prefix = el.value.slice(el.value[0], el.selectionStart);
+    var selected = el.value.slice(el.selectionStart, el.selectionEnd);
+    var suffix = el.value.slice(el.selectionEnd, el.value[el.value.length]);
 
+    selected = selected + "![Valid XHTML] (" + imageURL + ")";
+
+    var newTextAreaValue = prefix + selected + suffix;
+    el.value = newTextAreaValue;
+
+    renderHTML();
+    
 }
 
 //INPUT TABLE
@@ -64,10 +84,15 @@ function addMarkup(el,markup)
     		selected = "*" + selected + "*";
      	else if (markup == "underline")
      		selected = "__" + selected + "__";
-      	else if (markup == "h1")
-      		selected = "#" + selected;
       	else if (markup == "h2")
       		selected = "##" + selected;
+      	else if (markup == "h3")
+      		selected = "###" + selected;
+      	else if (markup == "bullet")
+      		selected = "- " + selected;
+      	else if (markup == "numeric")
+      		selected = "1. " + selected;
+         
     	
     	var newTextAreaValue = prefix + selected + suffix;
     	
