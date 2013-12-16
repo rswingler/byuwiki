@@ -1146,6 +1146,8 @@ var _takeOutHtml = function(text) {
 
 	text = text.replace(/(<)/g,
 		"&lt");
+
+	return text;
 }
 
 var _DoUnderline = function(text) {
