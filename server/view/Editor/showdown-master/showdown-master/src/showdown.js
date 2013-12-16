@@ -505,6 +505,7 @@ var _RunSpanGamut = function(text) {
 	text = _EncodeAmpsAndAngles(text);
 	text = _DoItalicsAndBold(text);
 	text = _DoUnderline(text);
+	text = _takeOutHtml(text);
 
 	// Do hard breaks:
 	text = text.replace(/  +\n/g," <br />\n");
@@ -1137,6 +1138,14 @@ var _DoItalicsAndBold = function(text) {
 		"<em>$2</em>");
 	
 	
+
+	return text;
+}
+
+var _takeOutHtml = function(text) {
+
+	text = text.replace(/(<)/g,
+		"&lt");
 
 	return text;
 }

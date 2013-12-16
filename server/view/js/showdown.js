@@ -1144,7 +1144,7 @@ var _DoItalicsAndBold = function(text) {
 
 var _takeOutHtml = function(text) {
 
-	text = text.replace(/(<)(?=\S)([^\r]*?\S)/g,
+	text = text.replace(/(<)/g,
 		"&lt");
 }
 
