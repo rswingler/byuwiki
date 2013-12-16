@@ -440,7 +440,7 @@ var _HashHTMLBlocks = function(text) {
 }
 
 var hashElement = function(wholeMatch,m1) {
-	var block Text = m1;
+	var blockText = m1;
 
 	// Undo double lines
 	blockText = blockText.replace(/\n\n/g,"\n");
