@@ -292,7 +292,7 @@ a {
     overflow: scroll;
 }
 #editContent #previewPane {
-    float: left;
+    float: right;
     overflow: scroll;
     background-color: white;
     width:49%;
