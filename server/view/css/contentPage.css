@@ -314,7 +314,7 @@ a {
 Save and cancel buttons
 *****/
  #buttons {
-    margin-bottom:2px;
+    margin-bottom:5px;
 }
 .save {
     float:left;
