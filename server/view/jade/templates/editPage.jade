@@ -6,33 +6,15 @@
 !!! 5
 html
   head
-    link(rel='stylesheet', type='text/css', href='/css/contentPage.css')
-    script(type='text/javascript', src='../../js/wikiEditorToolbar.js')
-    script(type='text/javascript', src='../../js/showdown.js')
-    script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    link(rel='stylesheet', type='text/css', href='../css/contentPage.css')
+    script(type='text/javascript', src='//code.jquery.com/jquery-2.0.3.min.js')
+    script(type='text/javascript', src='../js/showdown.js')
+    script(type='text/javascript', src='../js/wikiEditorToolbar.js')
+    script(type='text/javascript', src='../js/wikiEditorUtilities.js')
 
-    script
-      function addCategory() {
-      var category = prompt("Please enter a new category:");
-      if (category != null && category != "") {
-      displayResult(category);
-      }
-      }
-      function displayResult(category) {
-      var x = document.getElementById("categories");
-      var option = document.createElement("option");
-      option.text = category;
-      try {
-      // for IE earlier than version 8
-      x.add(option, x.options[null]);
-      } catch (e) {
-      x.add(option, null);
-      }
-      }
-
-  body(onload='renderHTML()')
+  body
     #menu
-      img(border='0', src='../../img/byu_logo.png', alt='BYU logo', width='100%', height='30%')
+      img(border='0', src='../img/byu_logo.png', alt='BYU logo', width='100%', height='30%')
       br
       a(href='')
         | Main Page
@@ -69,21 +51,21 @@ html
       //-#editorPanes
       menu#toolbar(type='toolbar')
            button(type='button', onclick='boldText()', value='bold')
-            img(src='../../img/bold.png')
+            img(src='../img/bold.png')
            button(type='button', onclick='italicText()', value='italics')
-            img(src='../../img/italic.png')
+            img(src='../img/italic.png')
            button(type='button', onclick='underlineText()', value='underline')
-            img(src='../../img/underline.png')
+            img(src='../img/underline.png')
            button(type='button', onclick='h2Text()', value='header 2')
-            img(src='../../img/h2.png')
+            img(src='../img/h2.png')
            button(type='button', onclick='h3Text()', value='header 3')
-            img(src='../../img/h3.png')
+            img(src='../img/h3.png')
            button(type='button', onclick='bulletList()', value='bullet')
-            img(src='../../img/list-bullet.png')
+            img(src='../img/list-bullet.png')
            button(type='button', onclick='numericList()', value='numeric')
-            img(src='../../img/list-numeric.png')
+            img(src='../img/list-numeric.png')
            button(type='button', onclick='addImage()', value='image')
-            img(src='../../img/image.png')
+            img(src='../img/image.png')
 
       textarea#inputPane(onkeydown='renderHTML()', onkeyup='renderHTML()', onkeypress='renderHTML()')
       #previewPane
@@ -97,7 +79,7 @@ html
 
 
       #buttons
-          a.save(onclick='saveAndPost()') Save Changes
-            a.cancel(href='#') Cancel
+          a#saveButton.save Save Changes
+            a.cancel(href='/wiki/#{urlTitle}') Cancel
 
 

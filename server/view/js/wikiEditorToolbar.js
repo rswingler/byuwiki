@@ -92,7 +92,7 @@ function addMarkup(el,markup)
     	
     	el.value = newTextAreaValue;
 
-	renderHTML();
+      renderHTML();
     	
        // return newTextAreaValue;
     }
@@ -107,9 +107,8 @@ function addMarkup(el,markup)
     //return "";
 }
 
-function renderHTML()
-{
-   	var inputPane = document.getElementById('inputPane');
+function renderHTML() {
+  var inputPane = document.getElementById('inputPane');
 	var previewPane = document.getElementById('previewPane');
 
 	//alert(iPane.value);
@@ -118,59 +117,6 @@ function renderHTML()
 
 	//alert(html);
 	previewPane.innerHTML = html;
-}
-
-function saveAndPost()
-{
-   //GET DOCUMENT ELEMENTS
-   var inputPane = document.getElementById('inputPane');
-   var previewPane = document.getElementById('previewPane');
-   var location = document.location.href;
-   var urlArray = location.split("/");
-
-   //GET TITLE, MARKUP, AND HTML CONTENT
-   var title = urlArray[urlArray.length - 1];
-   var markupContent = inputPane.value;
-   var htmlContent = previewPane.innerHTML;
-
-   //BUILD JSON
-   var article = new Object();
-   article.wikiTitle = title;
-   article.markup = markupContent;
-   article.html = htmlContent;
-
-   //PREP AJAX POST
-   var postURL = "http://ec2-54-201-62-212.us-west-2.compute.amazonaws.com/update/" + title;
-   //var postURL = "http://postcatcher.in/catchers/52afa3c33df7b40200000fe4";
-   var request = $.ajax({
-        'url': postURL,
-        'type': "POST",
-        'data': JSON.stringify(article),
-        'dataType': "json",
-        //'contentType': "application/json; charset=utf-8"
-    });
-
-    //AJAX RESPONSE CALLBACKS
-    request.done(function (response, textStatus, jqXHR){
-        //alert("Hooray, it worked!");
-    });
-
-
-    request.fail(function (jqXHR, textStatus, errorThrown){
-        //alert("FAIL: "+textStatus);
-    });
-
-    request.always(function () {
-        // reenable the inputs
-        //$inputs.prop("disabled", false);
-    });
-
-
-    //alert("RESPONSE: "+request.responseText);
-   //alert("TITLE: " + title);
-   //alert("MARKUP: "+markupContent);
-   //alert("HTML: " + htmlContent);
-   //alert("JSON: " + jsonText);
 }
 
 function send() {
