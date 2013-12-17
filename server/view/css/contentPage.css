@@ -289,6 +289,7 @@ a {
     height:70%;
     float: left;
     overflow: scroll;
+    resize: none;
 }
 #editContent #previewPane {
     float: right;
