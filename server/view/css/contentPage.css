@@ -297,6 +297,7 @@ a {
     background-color: white;
     width:49%;
     height:70%;
+    border: 1px solid;
 }
 #editContent #dropdown
 {
