@@ -296,7 +296,7 @@ a {
     overflow: scroll;
     background-color: white;
     width:49%;
-    height:70%;
+    height:71%;
     border: 1px solid;
 }
 #editContent #dropdown
@@ -305,7 +305,7 @@ a {
 }
 #editContent #addCategory
 {
-    margin-top:0;
+    margin-top:10px;
 }
 
 .accountInfo
@@ -320,7 +320,7 @@ Save and cancel buttons
 
 #buttons
 {
-    margin-bottom:30px;
+    margin-bottom:10px;
 }
 
 .save {
