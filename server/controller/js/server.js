@@ -85,7 +85,7 @@ var run = function(port) {
 	 */
 	var loadRoutes = function(app) {
 
-		app.get('/', recordRequest(homepage));
+		app.get('/', recordRequest(jadeHandler.showHomePage));
 		app.get('/wiki/:page', recordWikiRequest(jadeHandler.showWikiPage));
 		app.get('/edit/:page', recordEditRequest(jadeHandler.editWikiPage));
 
@@ -142,14 +142,6 @@ var run = function(port) {
 			stats['/edit']['total-edits']++;
 			callback(req, res);
 		});
-	};
-
-	/**
-	 * Dynamically populates the contents of the homepage. Used in place of an index.html
-	 * file.
-	 */
-	var homepage = function(req, res) {
-		res.send('Wiki Dummy Homepage');
 	};
 
 	/**

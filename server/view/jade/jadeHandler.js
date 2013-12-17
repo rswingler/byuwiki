@@ -33,6 +33,10 @@ exports.init = function(model, stats) {
         //     );
         // },
 
+        showHomePage: function(req, res) {
+            render(res, 'homepage');
+        },
+
         /**
          * Attempts to retrieve the wiki data for the requested page
          */
