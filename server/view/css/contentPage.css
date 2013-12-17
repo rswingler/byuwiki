@@ -287,9 +287,9 @@ a {
 #editContent #inputPane {
     width:49%;
     height:70%;
-    float: left;
-    overflow: scroll;
-    resize: none;
+    float:left;
+    resize:none;
+    overflow:scroll;
 }
 #editContent #previewPane {
     float: right;
