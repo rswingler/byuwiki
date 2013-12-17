@@ -47,9 +47,26 @@ exports.init = function(db) {
 					collection.update(page._id, page);
 				}
 				else {
-					throw "Could not find document " + pageName + "in articles."
+					throw "Could not find document " + pageName + " in articles.";
 				}
 			});
+		},
+
+		getPageContent: function(pageName, callback) {
+			var collection = db.get('articles');
+
+			safeFind(collection, {'wikiTitle': pageName}, function(results) {
+				var page = results[0] || null;
+				if (page) {
+					callback({
+						'html': page.html,
+						'markup': page.markup
+					});
+				}
+				else {
+					throw "Could not find document " + pageName + " in articles.";
+				}
+			})
 		}
 	}
 }

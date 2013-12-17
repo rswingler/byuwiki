@@ -1,34 +1,31 @@
 $(function() {
-  var saveAndPost = function() {
-    //GET DOCUMENT ELEMENTS
-    var inputPane = document.getElementById('inputPane');
-    var previewPane = document.getElementById('previewPane');
-    var location = document.location.href;
-    var urlArray = location.split("/");
+  //GET DOCUMENT ELEMENTS
+  var location = document.location.href;
+  var urlArray = location.split("/");
+  var title = urlArray[urlArray.length - 1];
+  urlArray.splice(-2, 2);
+  var dest = urlArray.join('/');
 
-    //GET TITLE, MARKUP, AND HTML CONTENT
-    var title = urlArray[urlArray.length - 1];
-    urlArray.splice(-2, 2);
-    var dest = urlArray.join('/');
-    var markupContent = inputPane.value;
-    var htmlContent = previewPane.innerHTML;
+  var saveAndPost = function() {
+    //GET MARKUP AND HTML CONTENT
+    var markupContent = $('#inputPane').val();
+    var htmlContent = $('#previewPane').html();
 
     //BUILD JSON
     var article = {
       'markup': markupContent,
       'html': htmlContent
     };
-    // article.wikiTitle = title;
 
     //PREP AJAX POST
     var postURL = dest + '/update/' + title;
     
     var request = $.ajax({
-        'url': postURL,
-        'type': 'POST',
-        'data': JSON.stringify(article),
-        'dataType': 'json',
-        'contentType': 'application/json'
+      'url': postURL,
+      'type': 'POST',
+      'data': JSON.stringify(article),
+      'dataType': 'json',
+      'contentType': 'application/json'
     });
 
     //AJAX RESPONSE CALLBACKS
@@ -36,19 +33,26 @@ $(function() {
       window.location.href = dest + '/wiki/' + title;
     });
 
-
     request.fail(function (jqXHR, textStatus, errorThrown){
         alert('Unable to save your changes at this time.');
     });
-
-    // request.always(function () {
-    //     // reenable the inputs
-    //     //$inputs.prop("disabled", false);
-    // });
   }
 
-  renderHTML();
-  $('#saveButton').click(function() {return saveAndPost();});
+  var initialize = $.ajax({
+    'url': dest + '/markup/' + title,
+    'type': 'GET',
+    'dataType': 'text'
+  });
+
+  initialize.done(function(response, textStatus, jqXHR) {
+    $('#inputPane').val(response);
+
+    // In wikiEditorToolbar.js
+    renderHTML();
+
+    $('#saveButton').click(function() {return saveAndPost();});
+  });
+
 });
 
 function addCategory() {

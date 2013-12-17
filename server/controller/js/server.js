@@ -90,6 +90,7 @@ var run = function(port) {
 		app.get('/edit/:page', recordEditRequest(jadeHandler.editWikiPage));
 
 		app.get('/createNew/:page', recordCreateRequest(createPage));
+		app.get('/markup/:page', recordRequest(getMarkup));
 
 		app.get('/stats', recordRequest(showStats));
 		
@@ -161,7 +162,22 @@ var run = function(port) {
 
         model.createPage(title);
         res.redirect('../../edit/' + pagename);
-	}
+	};
+
+	var getMarkup = function(req, res) {
+        var pagename = req.params.page || '';
+        var title = pagename.replace("_", " ");
+
+        try {
+        	model.getPageContent(title, function(pageData) {
+        		res.send(pageData['markup']);
+        	});
+    	} catch (e) {
+    		stats['requests']['404s']++;
+            console.log('Returning 404 response');
+            res.status(404).send('<h1>404 Not Found</h1><p>Unable to find wiki page <b>' + title + '</b>:<br>' + e + '</p>');
+    	}
+	};
 
 	var updatePage = function(req, res) {
         var pagename = req.params.page || '';
@@ -172,12 +188,12 @@ var run = function(port) {
 
         model.setPageContent(title, html, markup);
         res.send('{"status": "success"}');
-	}
+	};
 
 	var showStats = function(req, res) {
 		res.writeHead(200, {'Content-Type': 'application/json'});
 		res.end(JSON.stringify(stats));
-	}
+	};
 
 	loadStaticServing(app);
 	loadRoutes(app);
