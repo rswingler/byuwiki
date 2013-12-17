@@ -302,9 +302,13 @@ a {
     float:left;
     margin-top:10px;
 }
-#editContent #addCategory {
+#editContent #addCategoryButton {
+    float:left;
     margin-top:13px;
-    float: left;
+}
+#editContent #addCategory {
+    float:left;
+    margin-top:13px;
 }
 .accountInfo {
     font-size:10px;
