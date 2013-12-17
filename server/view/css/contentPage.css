@@ -298,17 +298,13 @@ a {
     height:71%;
     border: 1px solid;
 }
-#editContent #dropdown {
+#editContent #categories {
     float:left;
     margin-top:10px;
 }
-#editContent #addCategoryButton {
-    float:left;
-    margin-top:13px;
-}
 #editContent #addCategory {
     float:left;
-    margin-top:13px;
+    margin-top:10px;
 }
 .accountInfo {
     font-size:10px;
