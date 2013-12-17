@@ -138,25 +138,35 @@ function saveAndPost()
    article.wikiTitle = title;
    article.markup = markupContent;
    article.html = htmlContent;
-   var jsonText = JSON.stringify(article);
 
-   //PREP POST
+   //PREP AJAX POST
    var postURL = "http://ec2-54-201-62-212.us-west-2.compute.amazonaws.com/update/" + title;
-   var form = document.createElement("form");
-   form.setAttribute("method", "post");
-   form.setAttribute("action", postURL);
+   //var postURL = "http://postcatcher.in/catchers/52afa3c33df7b40200000fe4";
+   var request = $.ajax({
+        'url': postURL,
+        'type': "POST",
+        'data': JSON.stringify(article),
+        'dataType': "json",
+        //'contentType': "application/json; charset=utf-8"
+    });
 
-   //PREP FORM
-   var hiddenField = document.createElement("input");
-   hiddenField.setAttribute("type", "hidden");
-   hiddenField.setAttribute("name", "jsonArticle");
-   hiddenField.setAttribute("value", jsonText);
-   form.appendChild(hiddenField);
+    //AJAX RESPONSE CALLBACKS
+    request.done(function (response, textStatus, jqXHR){
+        //alert("Hooray, it worked!");
+    });
 
-   //APPEND FORM TO DOC, SUBMIT FORM VIA POST
-   document.body.appendChild(form);
-   form.submit();
 
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        //alert("FAIL: "+textStatus);
+    });
+
+    request.always(function () {
+        // reenable the inputs
+        //$inputs.prop("disabled", false);
+    });
+
+
+    //alert("RESPONSE: "+request.responseText);
    //alert("TITLE: " + title);
    //alert("MARKUP: "+markupContent);
    //alert("HTML: " + htmlContent);
