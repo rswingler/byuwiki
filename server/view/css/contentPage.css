@@ -303,11 +303,11 @@ a {
     margin-top:10px;
 }
 #editContent #addCategoryButton {
-    float:right;
+    float:left;
     margin-top:13px;
 }
 #editContent #addCategory {
-    float:right;
+    float:left;
     margin-top:13px;
 }
 .accountInfo {
