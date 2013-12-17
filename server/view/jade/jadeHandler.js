@@ -1,4 +1,4 @@
-exports.init = function(model) {
+exports.init = function(model, stats) {
     return {
         // write: function(req, res) {
         //     // Get our form values. These rely on the "name" attributes
@@ -45,6 +45,8 @@ exports.init = function(model) {
                     render(res, 'contentPage', {'urlTitle': pagename, 'title': title, 'content': data.html, 'isArticle': true});
                 }
                 else {
+                    stats['/wiki']['404s']++;
+                    console.log('Returning 404 response');
                     res.status(404).send('<h1>404 Not Found</h1><p>Unable to find wiki page <b>' + pagename + '</b>.</p>');
                 }
             });
@@ -62,6 +64,8 @@ exports.init = function(model) {
                     render(res, 'editPage', {'urlTitle': pagename, 'title': title, 'isArticle': true, 'categories': data.catagoryNames || []});
                 }
                 else {
+                    stats['/edit']['404s']++;
+                    console.log('Returning 404 response');
                     res.status(404).send('<h1>404 Not Found</h1><p>Unable to find wiki page <b>' + pagename + '</b>.</p>');
                 }
             });

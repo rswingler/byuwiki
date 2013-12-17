@@ -4,6 +4,27 @@
  * Initializes the web server and starts it listening on the given port
  */
 var run = function(port) {
+	var stats = {
+		'requests': {
+			'count': 0,
+			'404s': 0
+		},
+		'/wiki': {
+			'count': 0,
+			'404s': 0
+		},
+		'/edit': {
+			'count': 0,
+			'404s': 0,
+			'total-edits': 0
+		},
+		'/create': {
+			'count': 0,
+			'404s': 0,
+			'error: already exists': 0
+		}
+	}
+
 	/*
 	 * Load all dependencies
 	 */
@@ -32,7 +53,7 @@ var run = function(port) {
 	var model = require(getPath(['model', 'js', 'modelapi.js'])).init(db);
 
 	//JADE HANDLER
-	var jadeHandler = require(getPath(['view', 'jade', 'jadeHandler.js'])).init(model);
+	var jadeHandler = require(getPath(['view', 'jade', 'jadeHandler.js'])).init(model, stats);
 
 	var app = express();
 	//CONFIGURE EXPRESS FOR JADE
@@ -64,13 +85,15 @@ var run = function(port) {
 	 */
 	var loadRoutes = function(app) {
 
-		app.get('/', homepage);
-		app.get('/wiki/:page', jadeHandler.showWikiPage);
-		app.get('/edit/:page', jadeHandler.editWikiPage);
+		app.get('/', recordRequest(homepage));
+		app.get('/wiki/:page', recordWikiRequest(jadeHandler.showWikiPage));
+		app.get('/edit/:page', recordEditRequest(jadeHandler.editWikiPage));
 
-		app.get('/createNew/:page', createPage);
+		app.get('/createNew/:page', recordCreateRequest(createPage));
+
+		app.get('/stats', recordRequest(showStats));
 		
-		app.post('/update/:page', updatePage);
+		app.post('/update/:page', recordUpdateRequest(updatePage));
 		app.post('/github/pull', updateRepository);
 
 		//MONGO DYNAMICALLY LOADED PAGES (DUMMY PAGES)
@@ -79,6 +102,46 @@ var run = function(port) {
 
 		//WRITE TO DATABASE - ENDPOINTS
 		// app.post('/writeEndpoint', jadeHandler.write);
+	};
+
+	var recordRequest = function(callback) {
+		return function (req, res) {
+			console.log('Request received');
+			stats['requests']['count']++;
+			callback(req, res);
+		}
+	};
+
+	var recordWikiRequest = function(callback) {
+		return recordRequest(function(req, res) {
+			console.log('/wiki request received');
+			stats['/wiki']['count']++;
+			callback(req, res);
+		});
+	};
+
+	var recordEditRequest = function(callback) {
+		return recordRequest(function(req, res) {
+			console.log('/edit request received');
+			stats['/edit']['count']++;
+			callback(req, res);
+		});
+	};
+
+	var recordCreateRequest = function(callback) {
+		return recordRequest(function(req, res) {
+			console.log('/create request received');
+			stats['/create']['count']++;
+			callback(req, res);
+		});
+	};
+
+	var recordUpdateRequest = function(callback) {
+		return recordRequest(function(req, res) {
+			console.log('/edit update received');
+			stats['/edit']['total-edits']++;
+			callback(req, res);
+		});
 	};
 
 	/**
@@ -117,6 +180,11 @@ var run = function(port) {
 
         model.setPageContent(title, html, markup);
         res.send('{"status": "success"}');
+	}
+
+	var showStats = function(req, res) {
+		res.writeHead(200, {'Content-Type': 'application/json'});
+		res.end(JSON.stringify(stats));
 	}
 
 	loadStaticServing(app);
