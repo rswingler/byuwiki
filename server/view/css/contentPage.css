@@ -304,6 +304,7 @@ a {
 }
 #editContent #addCategory {
     margin-top:13px;
+    float: left;
 }
 .accountInfo {
     font-size:10px;
