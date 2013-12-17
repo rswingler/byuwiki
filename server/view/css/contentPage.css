@@ -260,7 +260,7 @@ a {
     text-indent: 6.0em;
 }
 /*Editing Page Content*/
-#editContent {
+ #editContent {
     background-color:white;
     border: 1px solid;
     margin-left:12%;
@@ -298,31 +298,23 @@ a {
     height:71%;
     border: 1px solid;
 }
-#editContent #dropdown
-{
+#editContent #dropdown {
     float:left;
     margin-top:10px;
 }
-#editContent #addCategory
-{
+#editContent #addCategory {
     margin-top:13px;
 }
-
-.accountInfo
-{
+.accountInfo {
     font-size:10px;
     font-style:italic;
 }
-
 /****
 Save and cancel buttons
 *****/
-
-#buttons
-{
+ #buttons {
     margin-bottom:0px;
 }
-
 .save {
     float:left;
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -416,8 +408,7 @@ Save and cancel buttons
     position:relative;
     top:1px;
 }
-#howToEdit
-{
+#howToEdit {
     position:relative;
     float:right;
 }

@@ -1,4 +1,26 @@
-<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href=/css/contentPage.css></head><body><div id="menu">
+<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href=/css/contentPage.css>
+<script>
+    function addCategory() {
+        var category = prompt("Please enter a new category:");
+
+        if (category != null && category != "") {
+            displayResult(category);
+        }
+    }
+
+    function displayResult(category) {
+
+        var x = document.getElementById("categories");
+        var option = document.createElement("option");
+        option.text = category;
+        try {
+            // for IE earlier than version 8
+            x.add(option, x.options[null]);
+        } catch (e) {
+            x.add(option, null);
+        }
+    }
+</script></head><body><div id="menu">
     <img border="0" src="http://localhost:8080/img/byu_logo.png" alt="BYU logo" width="100%" height="30%">
     <br> <a href="">Main Page<a>
         <br><a href="">Browse Majors<a>
@@ -35,22 +57,19 @@
         </form>
     </div>
 </div>
-<div id="editContent">
-     <a id="howToEdit" href="http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet">How to Edit This Page</a>
-     <h1>Editing: CS 142</h1>
-    <div id="placeHolder">Text Editor Goes Here</div>
+<div id="editContent"> <a id="howToEdit" href="http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet">How to Edit This Page</a>
 
-    <form id="dropdown" action="">
-        <select name="cars">
-            <option value="Select Category">Select Category</option>
-            <option value="saab">Physical & Mathematical Sciences</option>
-            <option value="fiat">Marriot School of Business</option>
-            <option value="audi">Theater & Media Arts</option>
+     <h1>Editing: CS 142</h1>
+
+    <div id="placeHolder">Text Editor Goes Here</div>
+    <form id="dropdown">
+        <select id="categories" name="categories">
         </select>
     </form>
-    <a id="addCategory" href="#">+</a> Add New Category</p>
-    <div id="buttons"> 
-        <a href="#" class="save">Save Changes</a>
+    <p><button type="button" onclick="addCategory()">+</button>
+    Add New Category</p>
+    <div id="buttons"> <a href="#" class="save">Save Changes</a>
  <a href="#" class="cancel">Cancel</a>
+
     </div>
 </div></body></html>
