@@ -287,7 +287,7 @@ a {
 }
 #editContent #inputPane {
     width:49%;
-    height:50%;
+    height:70%;
     float: left;
     overflow: scroll;
 }
@@ -296,7 +296,7 @@ a {
     overflow: scroll;
     background-color: white;
     width:49%;
-    height:505px;
+    height:70%;
 }
 #editContent #dropdown
 {
