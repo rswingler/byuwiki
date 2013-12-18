@@ -503,6 +503,7 @@ var _RunSpanGamut = function(text) {
 	// delimiters in inline links like [this](<url>).
 	text = _DoAutoLinks(text);
 	text = _EncodeAmpsAndAngles(text);
+	text = escapeHtml(text);
 	text = _DoItalicsAndBold(text);
 	text = _DoUnderline(text);
 
@@ -1127,6 +1128,20 @@ var _EncodeCode = function(text) {
 	return text;
 }
 
+var entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;',
+    "/": '&#x2F;'
+  };
+
+  function escapeHtml(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+      return entityMap[s];
+    });
+  }
 
 var _DoItalicsAndBold = function(text) {
 	// <strong> must go first:
