@@ -1,0 +1,35 @@
+//- Expected input data:
+//-   title (String) - The title of this category
+//-   pages (Array(Page)) - An array of page objects in this category
+//-     | urlTitle (String)- The url of the page
+//-     | title (String) - The display title of the page
+//-     | preview (String) - A brief few words from the page
+!!! 5
+html
+  head
+    link(rel='stylesheet', type='text/css', href='/css/contentPage.css')
+  body
+    #menu
+      img(border='0', src='../img/byu_logo.png', alt='BYU logo', width='100%', height='30%')
+      br
+      a(href='')
+        | Main Page
+        a
+          br
+          a(href='')
+            | Browse Majors
+            a
+    #topheader
+      a.login(href='#') Login
+      a.createaccount(href='#') Create Account
+      #search
+        form#cse-search-box(action='http/google.com/cse')
+          input(type='hidden', name='cx', value='YOUR SEARCH ENGINE ID goes here')
+          input(type='hidden', name='ie', value='UTF-8')
+          input(type='text', name='q', size='25')
+          input(type='submit', name='sa', value='Search')
+    #navigationContent
+      h1 Category: #{title}
+      each page in pages
+          a(href='/wiki/#{page.urlTitle}') #{page.title}
+          p #{page.preview}

@@ -67,6 +67,12 @@ exports.init = function(db) {
 					throw "Could not find document " + pageName + " in articles.";
 				}
 			})
+		},
+
+		findAllPages: function(callback) {
+			var collection = db.get('articles');
+
+			safeFind(collection, {}, callback);
 		}
 	}
 }

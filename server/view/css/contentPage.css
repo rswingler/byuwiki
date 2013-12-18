@@ -252,7 +252,6 @@ h1 {
     padding:10px
 }
 #navigationContent h1 {
-    font-size:20px;
     margin-bottom:20px;
 }
 #navigationContent h2 {
@@ -262,6 +261,13 @@ h1 {
 #navigationContent p {
     font-size:14px;
     text-indent: 6.0em;
+}
+#navigationContent a {
+    font-size:20px;
+    font-weight: bold;
+    text-indent: 4.0em;
+    display: block;
+    padding-top: 10px;
 }
 /*Editing Page Content*/
  #editContent {

@@ -91,6 +91,7 @@ var run = function(port) {
 
 		app.get('/createNew/:page', recordCreateRequest(createPage));
 		app.get('/markup/:page', recordRequest(getMarkup));
+		app.get('/list', recordRequest(jadeHandler.showNavigationPage));
 
 		app.get('/stats', recordRequest(showStats));
 		

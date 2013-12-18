@@ -75,6 +75,25 @@ exports.init = function(model, stats) {
                     res.status(404).send('<h1>404 Not Found</h1><p>Unable to find wiki page <b>' + pagename + '</b>.</p>');
                 }
             });
+        },
+
+        showNavigationPage: function(req, res) {
+            model.findAllPages(function(pages) {
+                var pageData = pages.map(function(page) {
+                    return {'urlTitle': page['wikiTitle'].replace(" ", "_"), 'title': page['wikiTitle'], 'preview': page['markup'].substring(0, 65)+'...'};
+                }).sort(function(a, b) {
+                    if (a.urlTitle > b.urlTitle){
+                        return 1;
+                    }
+                    else if (a.urlTitle < b.urlTitle) {
+                        return -1;
+                    }
+                    else {
+                        return 0;
+                    }
+                });
+                render(res, 'navigationPage', {'title': 'All Wiki Pages', 'pages': pageData});
+            });
         }
     };
 };
