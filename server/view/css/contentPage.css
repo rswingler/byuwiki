@@ -275,7 +275,7 @@ h1 {
     border: 1px solid;
     margin-left:12%;
     padding:10px;
-    height: 87%;
+    height: 85%;
 }
 #editContent #editorPanes {
     width:100%;
@@ -325,7 +325,7 @@ h1 {
 Save and cancel buttons
 *****/
  #buttons {
-    margin-bottom:5px;
+    margin-top:10px;
 }
 .save {
     float:left;
