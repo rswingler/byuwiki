@@ -300,6 +300,7 @@ h1 {
     float:left;
     resize:none;
     overflow:scroll;
+    margin-bottom:10px;
 }
 #editContent #previewPane {
     float: right;
