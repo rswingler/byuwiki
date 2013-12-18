@@ -503,7 +503,7 @@ var _RunSpanGamut = function(text) {
 	// delimiters in inline links like [this](<url>).
 	text = _DoAutoLinks(text);
 	text = _EncodeAmpsAndAngles(text);
-	text = escapeHtml(text);
+	//text = escapeHtml(text);
 	text = _DoItalicsAndBold(text);
 	text = _DoUnderline(text);
 
@@ -890,21 +890,6 @@ var _DoLists = function(text) {
 	return text;
 }
 
-var entityMap = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': '&quot;',
-    "'": '&#39;',
-    "/": '&#x2F;'
-  };
-
-  function escapeHtml(string) {
-    return String(string).replace(/[&<>"'\/]/g, function (s) {
-      return entityMap[s];
-    });
-  }
-
 _ProcessListItems = function(list_str) {
 //
 //  Process the contents of a single ordered or unordered list, splitting it
@@ -1004,7 +989,6 @@ var _DoCodeBlocks = function(text) {
 			var nextChar = m2;
 
 			codeblock = _EncodeCode( _Outdent(codeblock));
-
 			codeblock = _Detab(codeblock);
 			codeblock = codeblock.replace(/^\n+/g,""); // trim leading newlines
 			codeblock = codeblock.replace(/\n+$/g,""); // trim trailing whitespace
@@ -1017,6 +1001,7 @@ var _DoCodeBlocks = function(text) {
 
 	// attacklab: strip sentinel
 	text = text.replace(/~0/,"");
+
 	return text;
 };
 
@@ -1143,11 +1128,25 @@ var _EncodeCode = function(text) {
 	return text;
 }
 
+var entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;',
+    "/": '&#x2F;'
+  };
+
+  function escapeHtml(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+      return entityMap[s];
+    });
+  }
 
 var _DoItalicsAndBold = function(text) {
 	// <strong> must go first:
-	text = text.replace(/(<)/g,
-		"&lt");
+	//text = text.replace(/(<)/g,
+	//	"&lt");
 
 	text = text.replace(/(\*\*)(?=\S)([^\r]*?\S[*]*)\1/g,
 		"<strong>$2</strong>");
@@ -1159,8 +1158,6 @@ var _DoItalicsAndBold = function(text) {
 
 	return text;
 }
-
-
 
 var _DoUnderline = function(text) {
 
@@ -1228,7 +1225,6 @@ var _FormParagraphs = function(text) {
 	// Strip leading and trailing lines:
 	text = text.replace(/^\n+/g,"");
 	text = text.replace(/\n+$/g,"");
-
 
 	var grafs = text.split(/\n{2,}/g);
 	var grafsOut = [];

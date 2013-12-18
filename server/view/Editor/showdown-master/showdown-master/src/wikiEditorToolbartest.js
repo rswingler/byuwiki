@@ -25,13 +25,21 @@ function underlineText()
 {
   	addMarkup(getInputTextArea(), "underline");
 }
-function h1Text()
-{
-  	addMarkup(getInputTextArea(), "h1");
-}
 function h2Text()
 {
   	addMarkup(getInputTextArea(), "h2");
+}
+function h3Text()
+{
+  	addMarkup(getInputTextArea(), "h3");
+}
+function bulletList()
+{
+  	addMarkup(getInputTextArea(), "bullet");
+}
+function numericList()
+{
+  	addMarkup(getInputTextArea(), "numeric");
 }
 function getInputTextArea()
 {
@@ -41,13 +49,19 @@ function getInputTextArea()
 //INPUT IMAGE
 function addImage()
 {
+    var imageURL = prompt("Please enter the URL of your image:","http://yourPictureURL");
+    var el = getInputTextArea();
+    var prefix = el.value.slice(el.value[0], el.selectionStart);
+    var selected = el.value.slice(el.selectionStart, el.selectionEnd);
+    var suffix = el.value.slice(el.selectionEnd, el.value[el.value.length]);
 
-}
+    selected = selected + "![Valid XHTML] (" + imageURL + ")";
 
-//INPUT TABLE
-function addTable()
-{
- 	
+    var newTextAreaValue = prefix + selected + suffix;
+    el.value = newTextAreaValue;
+
+    renderHTML();
+    
 }
 
 function addMarkup(el,markup)
@@ -64,16 +78,21 @@ function addMarkup(el,markup)
     		selected = "*" + selected + "*";
      	else if (markup == "underline")
      		selected = "__" + selected + "__";
-      	else if (markup == "h1")
-      		selected = "#" + selected;
       	else if (markup == "h2")
       		selected = "##" + selected;
+      	else if (markup == "h3")
+      		selected = "###" + selected;
+      	else if (markup == "bullet")
+      		selected = "- " + selected;
+      	else if (markup == "numeric")
+      		selected = "1. " + selected;
+         
     	
     	var newTextAreaValue = prefix + selected + suffix;
     	
     	el.value = newTextAreaValue;
 
-	renderHTML();
+      renderHTML();
     	
        // return newTextAreaValue;
     }
@@ -88,9 +107,8 @@ function addMarkup(el,markup)
     //return "";
 }
 
-function renderHTML()
-{
-   	var inputPane = document.getElementById('inputPane');
+function renderHTML() {
+  var inputPane = document.getElementById('inputPane');
 	var previewPane = document.getElementById('previewPane');
 
 	//alert(iPane.value);
@@ -99,6 +117,26 @@ function renderHTML()
 
 	//alert(html);
 	previewPane.innerHTML = html;
+}
+
+function send() {
+        var person = {
+            name: $("#id-name").val(),
+            address:$("#id-address").val(),
+            phone:$("#id-phone").val()
+        };
+
+        $('#target').html('sending..');
+
+        $.ajax({
+            url: '/test/PersonSubmit',
+            type: 'post',
+            dataType: 'application/json',
+            success: function (data) {
+                $('#target').html(data.msg);
+            },
+            data: person
+        });
 }
 
 // function getSelectedText(el) {
