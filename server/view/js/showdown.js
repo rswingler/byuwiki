@@ -1130,8 +1130,8 @@ var _EncodeCode = function(text) {
 
 var _DoItalicsAndBold = function(text) {
 	// <strong> must go first:
-	text = text.replace(/(<)/g,
-		"");
+	//text = text.replace(/(<)/g,
+	//	"&lt");
 
 	text = text.replace(/(\*\*)(?=\S)([^\r]*?\S[*]*)\1/g,
 		"<strong>$2</strong>");
