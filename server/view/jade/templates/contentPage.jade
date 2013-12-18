@@ -9,7 +9,7 @@ html
     link(rel='stylesheet', type='text/css', href='/css/contentPage.css')
   body
     #menu
-      img(border='0', src='../img/byu_logo.png', alt='BYU logo', width='90%')
+      img(border='0', src='/img/byu_logo.png', alt='BYU logo', width='90%')
       br
       a(href='/')
         | Main Page
@@ -34,11 +34,9 @@ html
           li#edit
             a(href='/edit/#{urlTitle}') Edit
       #search
-        form#cse-search-box(action='http/google.com/cse')
-          input(type='hidden', name='cx', value='YOUR SEARCH ENGINE ID goes here')
-          input(type='hidden', name='ie', value='UTF-8')
-          input(type='text', name='q', size='25')
-          input(type='submit', name='sa', value='Search')
+        form#searchBox(action='/search', method='get')
+          input(type='text', name='query', size='40')
+          input(type='submit', value='Search')
     #articleContent
       h1 #{title}
       !{content}
