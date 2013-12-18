@@ -16,16 +16,16 @@ html
     #menu
       img(border='0', src='../img/byu_logo.png', alt='BYU logo', width='90%')
       br
-      a(href='/')
+      a(href='http://ec2-54-201-62-212.us-west-2.compute.amazonaws.com')
         | Main Page
         a
           br
-          a(href='/list')
-            | Browse Pages
+          a(href='')
+            | Browse Majors
             a
     #topheader
-      a.login(href='#') Login
-      a.createaccount(href='#') Create Account
+      //a.login(href='#') Login
+      //a.createaccount(href='#') Create Account
       #header
         ul
           li#selected
@@ -69,12 +69,12 @@ html
       textarea#inputPane(onkeydown='renderHTML()', onkeyup='renderHTML()', onkeypress='renderHTML()')
       #previewPane
 
-      #saveBar
-          form
-           select#categories(name='categories')
-           p#addCategory
-            button(type='button', onclick='addCategory()') +
-            | Add New Category
+      //#saveBar
+          //form
+           //select#categories(name='categories')
+           //p#addCategory
+            //button(type='button', onclick='addCategory()') +
+            //| Add New Category
 
 
       #buttons
