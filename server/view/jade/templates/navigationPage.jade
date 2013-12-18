@@ -20,14 +20,12 @@ html
             | Browse Pages
             a
     #topheader
-      a.login(href='#') Login
-      a.createaccount(href='#') Create Account
+      //a.login(href='#') Login
+      //a.createaccount(href='#') Create Account
       #search
-        form#cse-search-box(action='http/google.com/cse')
-          input(type='hidden', name='cx', value='YOUR SEARCH ENGINE ID goes here')
-          input(type='hidden', name='ie', value='UTF-8')
-          input(type='text', name='q', size='25')
-          input(type='submit', name='sa', value='Search')
+        form#searchBox(action='/search', method='get')
+          input(type='text', name='query', size='40')
+          input(type='submit', value='Search')
     #navigationContent
       h1 Category: #{title}
       each page in pages

@@ -24,8 +24,8 @@ html
             | Browse Majors
             a
     #topheader
-      //a.login(href='#') Login
-      //a.createaccount(href='#') Create Account
+      //-a.login(href='#') Login
+      //-a.createaccount(href='#') Create Account
       #header
         ul
           li#selected
@@ -39,11 +39,9 @@ html
           li#selected2
             a(href='#') Edit
       #search
-        form#cse-search-box(action='http/google.com/cse')
-          input(type='hidden', name='cx', value='YOUR SEARCH ENGINE ID goes here')
-          input(type='hidden', name='ie', value='UTF-8')
-          input(type='text', name='q', size='25')
-          input(type='submit', name='sa', value='Search')
+        form#searchBox(action='/search', method='get')
+          input(type='text', name='query', size='40')
+          input(type='submit', value='Search')
     #editContent
       h1
         | Edit: #{title}
@@ -69,13 +67,12 @@ html
       textarea#inputPane(onkeydown='renderHTML()', onkeyup='renderHTML()', onkeypress='renderHTML()')
       #previewPane
 
-      //#saveBar
-          //form
-           //select#categories(name='categories')
-           //p#addCategory
-            //button(type='button', onclick='addCategory()') +
-            //| Add New Category
-
+      #saveBar
+          //-form
+          //- select#categories(name='categories')
+          //- p#addCategory
+          //-  button(type='button', onclick='addCategory()') +
+          //-  | Add New Category
 
       #buttons
           a#saveButton.save Save Changes
