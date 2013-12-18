@@ -503,7 +503,7 @@ var _RunSpanGamut = function(text) {
 	// delimiters in inline links like [this](<url>).
 	text = _DoAutoLinks(text);
 	text = _EncodeAmpsAndAngles(text);
-	text = escapeHtml(text);
+	//text = escapeHtml(text);
 	text = _DoItalicsAndBold(text);
 	text = _DoUnderline(text);
 
