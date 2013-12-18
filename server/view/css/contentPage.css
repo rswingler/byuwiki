@@ -300,7 +300,6 @@ h1 {
     float:left;
     resize:none;
     overflow:scroll;
-    margin-bottom:10px;
 }
 #editContent #previewPane {
     float: right;
@@ -326,9 +325,10 @@ h1 {
 Save and cancel buttons
 *****/
  #buttons {
-    padding-top:10px;
+    margin-top:10px;
 }
 .save {
+    margin-top:10px;
     float:left;
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
     -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -375,6 +375,7 @@ Save and cancel buttons
     top:1px;
 }
 .cancel {
+    margin-top:10px;
     float:left;
     margin-left:5px;
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
