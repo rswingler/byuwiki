@@ -73,6 +73,14 @@ exports.init = function(db) {
 			var collection = db.get('articles');
 
 			safeFind(collection, {}, callback);
+		},
+
+		pageExists: function(pageName, callback) {
+			var collection = db.get('articles');
+
+			safeFind(collection, {'wikiTitle': pageName}, function(results) {
+				callback(results[0] || null)
+			});
 		}
 	}
 }

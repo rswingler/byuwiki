@@ -22,7 +22,13 @@ var run = function(port) {
 			'count': 0,
 			'404s': 0,
 			'error: already exists': 0
+		},
+		'/search': {
+			'count': 0,
+			'404s': 0,
+			'error: already exists': 0
 		}
+
 	}
 
 	/*
@@ -62,6 +68,35 @@ var run = function(port) {
 	app.use(express.urlencoded());
 	app.use(express.json());
 
+
+	/**
+	 * Wiki Search Engine
+	 */
+        var url = require('url');
+	var searchEngine = function(req, res)
+	{
+            var parts = url.parse(req.url, true);
+  	    var queryObj = parts.query;
+            var queryStr = queryObj.query; //".query" represents the name of the parameter from the GET request
+
+            var handleQuery = function(resultSet)
+	    {
+		if (resultSet == null)
+		{
+    		   //console.log("PAGE DOES NOT EXIST: " + queryStr);
+		   jadeHandler.showNavigationPage(req, res);
+		}
+                else
+		{
+		   //console.log("PAGE EXISTS: " + queryStr);
+                   req.params.page = queryStr;
+		   jadeHandler.showWikiPage(req, res);
+		}
+
+	    };
+             model.pageExists(queryStr, handleQuery);
+	};
+
 	/**
 	 * Enables static serving of .css and .js files from the server/view folder. Static
 	 * files are set to remain cached by the client for one full day.
@@ -93,6 +128,8 @@ var run = function(port) {
 		app.get('/markup/:page', recordRequest(getMarkup));
 		app.get('/list', recordRequest(jadeHandler.showNavigationPage));
 
+		app.get('/search?:term', searchRequest(searchEngine));
+
 		app.get('/stats', recordRequest(showStats));
 		
 		app.post('/update/:page', recordUpdateRequest(updatePage));
@@ -104,6 +141,15 @@ var run = function(port) {
 
 		//WRITE TO DATABASE - ENDPOINTS
 		// app.post('/writeEndpoint', jadeHandler.write);
+	};
+
+
+	var searchRequest = function(callback) {
+		return function (req, res) {
+			console.log('/search request received');
+			stats['/search']['count']++;
+			callback(req, res);
+		}
 	};
 
 	var recordRequest = function(callback) {
@@ -202,6 +248,8 @@ var run = function(port) {
 	app.listen(port);
 
 	console.log('Server listening on port ' + port);
+
+
 };
 
 exports.run = run;
