@@ -23,6 +23,15 @@ html
           a(href='/list')
             | Browse Pages
             a
+          br
+          br
+          br
+          br
+          br
+          | Create New Page
+          form#newPageBox(action='/createNew', method='get')
+            input(type='text', name='page', size='14', placeholder='Enter page name')
+            input(type='submit', value='Create')
     #topheader
       //-a.login(href='#') Login
       //-a.createaccount(href='#') Create Account

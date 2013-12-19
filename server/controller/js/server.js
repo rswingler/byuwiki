@@ -124,7 +124,7 @@ var run = function(port) {
 		app.get('/wiki/:page', recordWikiRequest(jadeHandler.showWikiPage));
 		app.get('/edit/:page', recordEditRequest(jadeHandler.editWikiPage));
 
-		app.get('/createNew/:page', recordCreateRequest(createPage));
+		app.get('/createNew?:page', recordCreateRequest(createPage));
 		app.get('/markup/:page', recordRequest(getMarkup));
 		app.get('/list', recordRequest(jadeHandler.showNavigationPage));
 
@@ -203,10 +203,18 @@ var run = function(port) {
 		spawn('./update.sh');
 	};
 
+	//CREATE NEW PAGE
 	var createPage = function(req, res) {
-        var pagename = req.params.page || '';
+
+        var parts = url.parse(req.url, true);
+  	var queryObj = parts.query;
+        var queryStr = queryObj.page; //".query" represents the name of the parameter from the GET request
+
+        var pagename = queryStr;
+        //var pagename = req.params.page || '';
         var title = pagename.replace("_", " ");
 
+	console.log("PAGE NAME: " + pagename);
         model.createPage(title);
         res.redirect('../../edit/' + pagename);
 	};
@@ -226,6 +234,7 @@ var run = function(port) {
     	}
 	};
 
+	//UPDATE PAGE
 	var updatePage = function(req, res) {
         var pagename = req.params.page || '';
         var title = pagename.replace("_", " ");
