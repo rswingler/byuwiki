@@ -1,6 +1,10 @@
 /*
 
+<<<<<<< HEAD
 THIS IS THE SECOND FILE
+=======
+NEW COMMENT
+>>>>>>> f06d2fa9f374cd06828f1779a89ba2b2977a370e
 
 */
 $(function() {
