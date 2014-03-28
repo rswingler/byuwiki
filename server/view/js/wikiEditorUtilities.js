@@ -1,3 +1,17 @@
+/*
+sdfa
+asdfasdf
+sdafsdaf
+sdfa
+sdfa
+sdfa
+sdfa
+sdfa
+sdfa
+sdfa
+sdfa
+sdfa
+*/
 $(function() {
   //GET DOCUMENT ELEMENTS
   var location = document.location.href;
