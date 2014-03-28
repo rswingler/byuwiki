@@ -16,7 +16,8 @@ $(function() {
       'markup': markupContent,
       'html': htmlContent
     };
-
+	
+	// my name is craig lively and I work at domo.
     //PREP AJAX POST
     var postURL = dest + '/update/' + title;
     
