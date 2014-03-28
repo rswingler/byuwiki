@@ -1,3 +1,8 @@
+/*
+
+NEW COMMENT
+
+*/
 $(function() {
   //GET DOCUMENT ELEMENTS
   var location = document.location.href;
