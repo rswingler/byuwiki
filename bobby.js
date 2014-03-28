@@ -1,7 +1,7 @@
 $(function() {
   //GET DOCUMENT ELEMENTS
   var myLocation = document.location.href;
-  var urlArray = location.split("/");
+  var myURLarray = location.split("/");
   var title = urlArray[urlArray.length - 1];
   urlArray.splice(-2, 2);
   var dest = urlArray.join('/');
