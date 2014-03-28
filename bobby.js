@@ -1,6 +1,6 @@
 $(function() {
   //GET DOCUMENT ELEMENTS
-  var myLocation = document.location.href;
+  var location = document.location.href;
   var myURLarray = location.split("/");
   var title = urlArray[urlArray.length - 1];
   urlArray.splice(-2, 2);
