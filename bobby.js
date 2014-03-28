@@ -1,5 +1,3 @@
-/* my bacon comment */
-
 $(function() {
   //GET DOCUMENT ELEMENTS
   var myLocationBACON = document.location.href;
